@@ -12,8 +12,8 @@ namespace IBASEmployeeService.Controllers
         {
             _logger = logger;
         }
-
-
+        
+        
         [HttpGet("GetEmployees")]
         public IEnumerable<Employee> Get()
         {
@@ -69,5 +69,13 @@ namespace IBASEmployeeService.Controllers
         };
             return employees;
         }
+        
+        [HttpGet("GetAllEmployeesByDepartmentId/{departmentId}")]
+        public IEnumerable<Employee> GetAllEmployeesByDepartment(int departmentId)
+        {
+            var FilteredEmployees = Get().Where(e => e.Department != null && e.Department.Id == departmentId);
+            return FilteredEmployees;
+        }
+        
     }
 }
